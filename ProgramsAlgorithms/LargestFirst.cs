@@ -17,11 +17,11 @@ namespace ProgramsAlgorithms
             return PaintGraph(graphCopy, limit, verbose);
         }
 
-        private int[] PaintGraph(Graph petersenGraph, int limit, bool verbose)
+        private int[] PaintGraph(Graph graphToPaint, int limit, bool verbose)
         {
             int[] sortedVertices;
-            BottomUpMergeSort(petersenGraph, out sortedVertices, verbose: false);
-            int[] verticesColors = PaintVerticesGreedily(petersenGraph, limit, sortedVertices);
+            BottomUpMergeSort(graphToPaint, out sortedVertices, verbose: false);
+            int[] verticesColors = PaintVerticesGreedily(graphToPaint, limit, sortedVertices);
             PrintColors(verbose, sortedVertices, verticesColors);
             return verticesColors;
         }

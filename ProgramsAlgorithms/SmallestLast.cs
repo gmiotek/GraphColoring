@@ -17,10 +17,10 @@ namespace ProgramsAlgorithms
             return PaintGraph(graphCopy, limit, verbose);
         }
 
-        private int[] PaintGraph(Graph paintedGraph, int limit, bool verbose)
+        private int[] PaintGraph(Graph graphToPaint, int limit, bool verbose)
         {
-            int[] sortedVertices = SortSmallestDegreeFirst(paintedGraph);
-            int[] verticesColors = PaintVerticesGreedily(paintedGraph, limit, sortedVertices);
+            int[] sortedVertices = SortSmallestDegreeFirst(graphToPaint);
+            int[] verticesColors = PaintVerticesGreedily(graphToPaint, limit, sortedVertices);
             PrintColors(verbose, sortedVertices, verticesColors);
             return verticesColors;
         }
