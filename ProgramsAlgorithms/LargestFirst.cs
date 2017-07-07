@@ -9,7 +9,7 @@ namespace ProgramsAlgorithms
 {
     public class LargestFirst : ColoringGraphs
     {
-        public override string Name => "Largest First";
+        public override string Name => "LargestFirst";
 
         public override int[] GetPaintedVertices(Graph graphToPaint, int limit, bool verbose)
         {

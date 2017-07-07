@@ -12,35 +12,48 @@ namespace ProgramsAlgorithms
     {
         static void Main(string[] args)
         {
-            Graph petersenGraph;
-            try
+            //Add files with graph to the Debug folder and then put theit names into the list below.
+            //All the output files will be prepared in a folder with timestamp in the Debug directory
+            List<string> fileNames = new List<string>() { "In.txt", "PetersenGraph.txt" };
+            string mainFolderWithTimestamp = DateTime.Now.ToString("yyyy-MM-dd_HH.mm.ss");
+            Directory.CreateDirectory(mainFolderWithTimestamp);
+            foreach (var inputFileName in fileNames)
             {
-                petersenGraph = GraphFiles.GetGraphFromFile("in.txt");
-            }
-            catch (FileNotFoundException)
-            {
-                Console.WriteLine("File has not been found");
-                Console.ReadLine();
-                return;
-            }
-            catch(FormatException)
-            {
-                Console.WriteLine("Wrong data in the file");
-                Console.ReadLine();
-                return;
-            }
-            //new AdjacencyMatrixGraph(false, 11)
-            //{ new Edge(0,1), new Edge(0,3), new Edge(0,4), new Edge(0,5), new Edge(1,2), new Edge(1,7),
-            //    new Edge(1,9), new Edge(2,3), new Edge(2,6), new Edge(3,8), new Edge(3,10), new Edge(4,6),
-            //    new Edge(4,9), new Edge(5,6), new Edge(5,10), new Edge(6,7), new Edge(6,8), new Edge(7,10),
-            //    new Edge(8,9), new Edge(9,10)};
+                Graph graphToColor;
+                try
+                {
+                    graphToColor = GraphFiles.GetGraphFromFile(inputFileName);
+                }
+                catch (FileNotFoundException)
+                {
+                    Console.WriteLine($"File has not been found: {inputFileName}");
+                    Console.ReadLine();
+                    return;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine($"Wrong data in the file: {inputFileName}");
+                    Console.ReadLine();
+                    continue;
+                }
 
-            List<ColoringGraphs> coloringAgorithms = new List<ColoringGraphs>() { new LargestFirst(), new SmallestLast(), new DSatur() };
-            foreach (var algorithm in coloringAgorithms)
-            {
-                algorithm.GetPaintedVertices(graphToPaint: petersenGraph, limit: 3, verbose: true);
+                List<ColoringGraphs> coloringAgorithms = new List<ColoringGraphs>() { new LargestFirst(), new SmallestLast(), new DSatur() };
+                foreach (var algorithm in coloringAgorithms)
+                {
+                    string[] splitInputFileName = inputFileName.Split(new char[] { '.' });
+                    string outputFileName = $@"{mainFolderWithTimestamp}\" + splitInputFileName[0] + algorithm.Name + ".txt";
+                    using (StreamWriter writer = new StreamWriter(outputFileName))
+                    {
+                        int[] verticesColros = algorithm.GetPaintedVertices(graphToPaint: graphToColor, limit: 3, verbose: true);
+                        writer.WriteLine($"{graphToColor.VerticesCount} {algorithm.ColorsUsedCount}");
+                        for (int i = 0; i < graphToColor.VerticesCount; i++)
+                        {
+                            writer.WriteLine($"{i} {verticesColros[i]}");
+                        }
+                    }
+                }
             }
-
+            Console.WriteLine("Press any key to close");
             Console.ReadLine();
         }
     }

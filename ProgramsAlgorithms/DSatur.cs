@@ -78,6 +78,7 @@ namespace ProgramsAlgorithms
                 }
             }
             PrintColors(verbose, sortedVertices, verticesColors);
+            ColorsUsedCount = verticesInSameColorCount.Count;
             return verticesColors;
         }
     }

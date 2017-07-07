@@ -9,7 +9,7 @@ namespace ProgramsAlgorithms
 {
     public class SmallestLast : ColoringGraphs
     {
-        public override string Name => "Smallest Last";
+        public override string Name => "SmallestLast";
 
         public override int[] GetPaintedVertices(Graph graphToPaint, int limit, bool verbose)
         {
