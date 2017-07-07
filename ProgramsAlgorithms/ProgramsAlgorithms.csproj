@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DSatur.cs" />
+    <Compile Include="GraphFiles.cs" />
     <Compile Include="LargestFirst.cs" />
     <Compile Include="ColoringGraphs.cs" />
     <Compile Include="Program.cs" />

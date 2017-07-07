@@ -11,6 +11,7 @@ namespace ProgramsAlgorithms
     {
         public abstract int[] GetPaintedVertices(Graph graphToPaint, int limit, bool verbose);
         public abstract string Name { get; }
+        public int ColorsUsedCount { get; set; }
         protected int[] PaintVerticesGreedily(Graph graphToPaint, int limit, int[] sortedVertices)
         {
             int[] verticesColors = new int[graphToPaint.VerticesCount];
@@ -48,7 +49,7 @@ namespace ProgramsAlgorithms
                     verticesColors[currentVertex] = verticesInSameColorCount.Count - 1;
                 }
             }
-
+            ColorsUsedCount = verticesInSameColorCount.Count;
             return verticesColors;
         }
 
